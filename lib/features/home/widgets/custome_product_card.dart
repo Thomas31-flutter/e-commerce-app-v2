@@ -26,7 +26,7 @@ class _CustomeProductCardState extends State<CustomeProductCard> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           boxShadow: [
             BoxShadow(
               color: Colors.black12,

@@ -1,3 +1,4 @@
+import 'package:ecommercev2app/core/notifier/theme_notifier.dart';
 import 'package:ecommercev2app/features/home/get_all_products_cubit/getallproductscubit.dart';
 import 'package:ecommercev2app/features/login/screens/login_screen.dart';
 import 'package:ecommercev2app/features/main_layout/main_layout_bottomnavigationbar_screen.dart';
@@ -27,23 +28,50 @@ class MyApp extends StatelessWidget {
           create: (context) => GetAllProductsCubit(),
         ),
       ],
-      child: MaterialApp(
-        routes: {"productdetailsscreen": (context) => ProductDetailsScreen()},
-        debugShowCheckedModeBanner: false,
-        home: FutureBuilder(
-          future: hasToken(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else {
-              if (snapshot.data == true) {
-                return BottomNavigationBarMainLayout();
-              } else {
-                return LoginScreen();
-              }
-            }
-          },
-        ),
+      child: ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeNotifier,
+        builder: (context, currentTheme, child) {
+          return MaterialApp(
+            theme: ThemeData(
+              brightness: Brightness.light,
+              scaffoldBackgroundColor: Colors.white,
+              cardColor: Colors.white,
+              iconTheme: const IconThemeData(color: Colors.black),
+              textTheme: const TextTheme(
+                bodyLarge: TextStyle(color: Colors.black),
+              ),
+            ),
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              scaffoldBackgroundColor: const Color(0xFF121212),
+              cardColor: const Color(0xFF1E1E1E),
+              iconTheme: const IconThemeData(color: Colors.white),
+              textTheme: const TextTheme(
+                bodyLarge: TextStyle(color: Colors.white),
+              ),
+            ),
+
+            themeMode: currentTheme,
+            routes: {
+              "productdetailsscreen": (context) => ProductDetailsScreen(),
+            },
+            debugShowCheckedModeBanner: false,
+            home: FutureBuilder(
+              future: hasToken(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  if (snapshot.data == true) {
+                    return BottomNavigationBarMainLayout();
+                  } else {
+                    return LoginScreen();
+                  }
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }

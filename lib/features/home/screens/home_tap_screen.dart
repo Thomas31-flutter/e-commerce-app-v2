@@ -30,7 +30,7 @@ class _HomeTapScreenState extends State<HomeTapScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: <Widget>[
+          children: [
             Container(
               height: 210,
               child: PageView.builder(

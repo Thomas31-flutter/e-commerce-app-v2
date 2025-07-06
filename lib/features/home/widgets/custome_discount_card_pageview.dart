@@ -41,7 +41,11 @@ class CustomeDiscountCardPageview extends StatelessWidget {
                 children: [
                   Text(
                     "24% off shipping today \n on pag burshase",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
                   ),
                   Text("by kutuku store", style: TextStyle(color: Colors.grey)),
                 ],
