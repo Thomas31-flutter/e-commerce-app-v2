@@ -37,8 +37,9 @@ class _BottomNavigationBarMainLayoutState
           iconSize: 36,
           currentIndex: index,
           onTap: (value) {
-            index = value;
-            setState(() {});
+            setState(() {
+              index = value;
+            });
           },
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
