@@ -6,9 +6,11 @@ class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final productModel =
-        ModalRoute.of(context)!.settings.arguments as ProductModel;
-
+    final productModel = ModalRoute.of(context)?.settings.arguments;
+    if (productModel == null || productModel is! ProductModel) {
+      return const Center(child: Text("No product found"));
+    }
+    final castedProduct = productModel as ProductModel;
     return Scaffold(
       body: Stack(
         children: [
@@ -17,7 +19,7 @@ class ProductDetailsScreen extends StatelessWidget {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  child: Image.network(productModel.image, fit: BoxFit.cover),
+                  child: Image.network(castedProduct.image, fit: BoxFit.cover),
                 ),
               ),
               SizedBox(height: 100),
@@ -78,7 +80,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          productModel.title,
+                          castedProduct.title,
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -118,7 +120,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    productModel.description,
+                    castedProduct.description,
                     style: TextStyle(color: Colors.grey[700], fontSize: 16),
                   ),
                   Spacer(),
@@ -126,14 +128,14 @@ class ProductDetailsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "\$ ${productModel.price}",
+                        "\$ ${castedProduct.price}",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
-                      custom_button_addtocart(product: productModel),
+                      CustomButtonAddToCart(product: castedProduct),
                     ],
                   ),
                 ],

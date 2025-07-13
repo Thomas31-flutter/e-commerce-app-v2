@@ -1,15 +1,16 @@
+import 'package:ecommercev2app/models/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/product_model.dart';
 import '../../cart/cubit/cart_screen_cubit.dart';
 
-class custom_button_addtocart extends StatelessWidget {
-  const custom_button_addtocart({super.key, required this.product});
+class CustomButtonAddToCart extends StatelessWidget {
+  const CustomButtonAddToCart({super.key, required this.product});
   final ProductModel product;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartScreenCubit, List<ProductModel>>(
-      builder: (context, listOfCarts) {
+    return BlocBuilder<CartScreenCubit, List<CartItem>>(
+      builder: (context, cartItems) {
         return ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.deepPurple,

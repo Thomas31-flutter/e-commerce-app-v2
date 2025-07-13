@@ -91,6 +91,8 @@ class MyApp extends StatelessWidget {
 //   Widget build(BuildContext context) {
 //     return MultiBlocProvider(
 //       providers: [
+//         BlocProvider<CartScreenCubit>(create: (context) => CartScreenCubit()),
+//         BlocProvider<FavouritesCubit>(create: (context) => FavouritesCubit()),
 //         BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
 //         BlocProvider<GetAllProductsCubit>(
 //           create: (context) => GetAllProductsCubit(),
@@ -122,6 +124,7 @@ class MyApp extends StatelessWidget {
 //             themeMode: currentTheme,
 //             routes: {
 //               "productdetailsscreen": (context) => ProductDetailsScreen(),
+// "cartscreen": (context) => CartScreen(),
 //             },
 //             debugShowCheckedModeBanner: false,
 //             home: SplashScreen(),
