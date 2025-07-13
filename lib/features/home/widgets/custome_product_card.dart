@@ -11,8 +11,7 @@ class CustomeProductCard extends StatefulWidget {
   });
   final void Function() onTapToDetails;
   final ProductModel productModel;
-  // final bool isFavourite;
-  // final VoidCallback onFavouritToggle;
+
   @override
   State<CustomeProductCard> createState() => _CustomeProductCardState();
 }
@@ -55,20 +54,7 @@ class _CustomeProductCardState extends State<CustomeProductCard> {
                     top: 10,
                     right: 10,
                     child: CustomeFavouriteIcon(
-                      active: isActive,
-                      onTap: () {
-                        setState(() {
-                          isActive = !isActive;
-                          if (isActive) {
-                            favouritesProducts.add(widget.productModel);
-                          } else {
-                            favouritesProducts.removeWhere(
-                              (element) =>
-                                  element.title == widget.productModel.title,
-                            );
-                          }
-                        });
-                      },
+                      productModel: widget.productModel,
                     ),
                   ),
                 ],

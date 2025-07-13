@@ -1,4 +1,4 @@
-import 'package:ecommercev2app/features/cart/cart_screen.dart';
+import 'package:ecommercev2app/features/cart/screens/cart_screen.dart';
 import 'package:ecommercev2app/features/favourite/screens/favourite_screen.dart';
 import 'package:ecommercev2app/features/home/screens/home_screen.dart';
 import 'package:ecommercev2app/features/profile/profile_screen.dart';
