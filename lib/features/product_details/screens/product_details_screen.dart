@@ -1,13 +1,14 @@
 import 'package:ecommercev2app/models/product_model.dart';
 import 'package:flutter/material.dart';
+import '../widgets/custome_button_addtocart.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final productModel =
         ModalRoute.of(context)!.settings.arguments as ProductModel;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -81,6 +82,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
+                            color: Colors.black,
                           ),
                           textAlign: TextAlign.start,
                         ),
@@ -108,7 +110,11 @@ class ProductDetailsScreen extends StatelessWidget {
                   SizedBox(height: 16),
                   Text(
                     "Description",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(height: 6),
                   Text(
@@ -124,29 +130,10 @@ class ProductDetailsScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
-                      ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepPurple,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.shopping_cart_outlined,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          "Add to Cart",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                      custom_button_addtocart(product: productModel),
                     ],
                   ),
                 ],

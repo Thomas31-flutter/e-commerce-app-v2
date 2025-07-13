@@ -2,11 +2,13 @@ import 'package:ecommercev2app/core/notifier/theme_notifier.dart';
 import 'package:ecommercev2app/features/home/get_all_products_cubit/getallproductscubit.dart';
 import 'package:ecommercev2app/features/login/screens/login_screen.dart';
 import 'package:ecommercev2app/features/main_layout/main_layout_bottomnavigationbar_screen.dart';
-import 'package:ecommercev2app/features/product_details/product_details_screen.dart';
+import 'package:ecommercev2app/features/product_details/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../features/cart/cubit/cart_screen_cubit.dart';
+import '../features/cart/screens/cart_screen.dart';
 import '../features/favourite/cubit/favourites_cubit.dart';
 import '../features/login/cubit/login_cubit.dart';
 import '../features/splash/screens/splash_screen.dart';
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<CartScreenCubit>(create: (context) => CartScreenCubit()),
         BlocProvider<FavouritesCubit>(create: (context) => FavouritesCubit()),
         BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
         BlocProvider<GetAllProductsCubit>(
@@ -56,6 +59,7 @@ class MyApp extends StatelessWidget {
             themeMode: currentTheme,
             routes: {
               "productdetailsscreen": (context) => ProductDetailsScreen(),
+              "cartscreen": (context) => CartScreen(),
             },
             debugShowCheckedModeBanner: false,
             home: FutureBuilder(
