@@ -1,3 +1,88 @@
+import 'package:ecommercev2app/features/cart/cubit/cart_screen_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../models/cart_model.dart';
+import '../widgets/custome_listtile_of_cartscreen.dart';
+
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Cart"), centerTitle: true),
+      body: BlocBuilder<CartScreenCubit, List<CartItem>>(
+        builder: (context, cartItems) {
+          if (cartItems.isEmpty) {
+            return const Center(
+              child: Text("Your cart is empty", style: TextStyle(fontSize: 24)),
+            );
+          } else {
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      final item = cartItems[index];
+
+                      return CustomeListTileOfCartScreen(item: item);
+                    },
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    boxShadow: const [
+                      BoxShadow(color: Colors.black12, blurRadius: 8),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Total: ${context.read<CartScreenCubit>().totalPrice.toStringAsFixed(2)} EGP",
+                        textAlign: TextAlign.right,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Checkout has been implemented."),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                        child: const Text(
+                          "Checkout",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }
+        },
+      ),
+    );
+  }
+}
+
 // import 'package:ecommercev2app/features/cart/cubit/cart_screen_cubit.dart';
 // import 'package:ecommercev2app/features/main_layout/main_layout_bottomnavigationbar_screen.dart';
 // import 'package:ecommercev2app/models/cart_model.dart';
@@ -79,88 +164,3 @@
 //     );
 //   }
 // }
-
-import 'package:ecommercev2app/features/cart/cubit/cart_screen_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../models/cart_model.dart';
-import '../widgets/custome_listtile_of_cartscreen.dart';
-
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Cart")),
-      body: BlocBuilder<CartScreenCubit, List<CartItem>>(
-        builder: (context, cartItems) {
-          if (cartItems.isEmpty) {
-            return const Center(
-              child: Text("Your cart is empty", style: TextStyle(fontSize: 24)),
-            );
-          }
-
-          return Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: cartItems.length,
-                  itemBuilder: (context, index) {
-                    final item = cartItems[index];
-
-                    return CustomeListTileOfCartScreen(item: item);
-                  },
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(16),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  boxShadow: const [
-                    BoxShadow(color: Colors.black12, blurRadius: 8),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      "Total: ${context.read<CartScreenCubit>().totalPrice.toStringAsFixed(2)} EGP",
-                      textAlign: TextAlign.right,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Checkout has been implemented."),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      child: const Text(
-                        "Checkout",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}

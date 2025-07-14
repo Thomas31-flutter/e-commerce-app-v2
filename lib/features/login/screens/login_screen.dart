@@ -126,7 +126,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     userName: userNameCont.text,
                                     password: PasswordCont.text,
                                   );
-                                  print("button done");
+                                  // print("button done");
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          BottomNavigationBarMainLayout(),
+                                    ),
+                                    (route) => false,
+                                  );
                                 }
                               },
                               child: Container(
